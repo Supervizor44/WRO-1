@@ -1,0 +1,66 @@
+﻿@using WRO.Web.Areas.Admin.Models.Team
+@model IEnumerable<ListTeamModel>
+
+@{
+    ViewData["Title"] = "Komandalar";
+}
+
+<h2>Komandalar</h2>
+
+<a asp-action="Excel" asp-route-year="@Context.Request.Query["year"]">Seçilmiş sezounu excel kimi yüklə</a>
+<br />
+<partial name="_SelectSeasonPartial"></partial>
+@await Component.InvokeAsync("SelectContestCategory", new { setQueryString = true })
+
+@{
+    string selectedWinners = Context.Request.Query["winners"];
+}
+Qaliblər: <input type="checkbox" onchange="setQueryString('winners', this.checked)" asp-for="@selectedWinners"/>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Komanda adı
+            </th>
+            <th>
+                Yarışdığı kateqoriya
+            </th>
+            <th>
+                Təlimçi
+            </th>
+            <th>
+                Qeydiyyat tarixi
+            </th>
+            <th>
+                Qalibdir?
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model!)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.ContestCategoryName
+                </td>
+                <td>
+                    @item.TeamCoachFullName
+                </td>
+                <td>
+                    @item.RegistrationDate
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsWinner)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Təfərrüatlar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,19 @@
+﻿@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    int.TryParse(Context.Request.Query["year"], out int selectedYear);
+
+    int startYear = 2023;
+
+    var years = Enumerable.Range(startYear, count: DateTime.Now.Year - startYear + 1)
+                .Select(x => new SelectListItem(x.ToString(), x.ToString()))
+                .ToList();
+}
+
+<select onchange="setQueryString('year', this.value);"
+        asp-for="@selectedYear"
+        asp-items="years">
+    <option value="">@Localizer["seasons"]</option>
+</select>

@@ -1,0 +1,15 @@
+﻿@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Lang> Localizer
+@model Guid
+
+@{
+    Guid Id = Model;
+}
+
+<form asp-action="Delete" 
+      method="post"
+      onsubmit="return confirm('Silmək istədiyinizə əminsiniz??')">
+
+    <input type="hidden" asp-for="@Id" />
+    <button class="btn btn-danger">Sil</button>
+</form>

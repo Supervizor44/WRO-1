@@ -1,0 +1,25 @@
+﻿@using Microsoft.Extensions.Localization
+@using WRO.Web.Models.News
+
+@inject IStringLocalizer<Lang> Localizer
+
+@model IEnumerable<ListNewsModel>
+
+@{
+    ViewData["Title"] = @Localizer["news_p"];
+}
+
+<h1 class="text-center">@Localizer["news_p"]</h1>
+
+@foreach (var news in Model!)
+{
+    <div class="border m-2 row">
+        <div class="col-md-4">
+            <img src="@news.ImagePath" height="150">
+        </div>
+        <div class="col-md-8">
+            <h5>@news.Title</h5>
+            <p>@news.ShortBody</p>
+        </div>
+    </div>
+}

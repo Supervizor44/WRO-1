@@ -1,0 +1,54 @@
+﻿@using WRO.Web.Areas.Admin.Models.Volunteer
+
+
+@{
+    ViewData["Title"] = "Könüllülər";
+}
+
+<h2>Könüllülər</h2>
+
+<a asp-action="Excel" asp-route-year="@Context.Request.Query["year"]">Seçilmiş sezounu excel kimi yüklə</a>
+<br />
+<partial name="_SelectSeasonPartial"></partial>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tam adı
+            </th>
+            <th>
+                Əlaqə nömrəsi
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Qeydiyyat tarixi
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model!)
+        {
+            <tr>
+                <td>
+                    @item.FullName
+                </td>
+                <td>
+                    @item.PhoneNumber
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.RegistrationDate
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Təfərrüatlar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

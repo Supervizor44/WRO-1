@@ -1,0 +1,84 @@
+﻿@using Microsoft.Extensions.Localization
+@using WRO.Web.Models.Register
+
+@model RegisterVolunteerModel
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    ViewData["Title"] = Localizer["register"];
+}
+
+<style>
+    .form-group {
+        margin-top: 1rem;
+    }
+</style>
+
+<h1>@Localizer["register"]</h1>
+
+<h4>@Localizer["volunteer"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <form asp-action="Volunteer" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdentityNumber" class="control-label"></label>
+                <input asp-for="IdentityNumber" class="form-control text-uppercase"/>
+                <span asp-validation-for="IdentityNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdSerialNumber" class="control-label"></label>
+                <input asp-for="IdSerialNumber" class="form-control text-uppercase" />
+                <span asp-validation-for="IdSerialNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProfessionAtUniversity" class="control-label"></label>
+                <input asp-for="ProfessionAtUniversity" class="form-control" />
+                <span asp-validation-for="ProfessionAtUniversity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VolunteerExperience" class="control-label"></label>
+                <input asp-for="VolunteerExperience" class="form-control" />
+                <span asp-validation-for="VolunteerExperience" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="KnownForeignLanguages" class="control-label"></label>
+                <input asp-for="KnownForeignLanguages" class="form-control" />
+                <span asp-validation-for="KnownForeignLanguages" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdentityCardImageForm" class="control-label"></label>
+                <input asp-for="IdentityCardImageForm"  accept="image/*, application/pdf" class="form-control" />
+                <span asp-validation-for="IdentityCardImageForm" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["submit"]" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_ValidationScriptsPartial" />

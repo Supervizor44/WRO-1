@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+@inject IOptions<RequestLocalizationOptions> options
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>()!.RequestCulture;
+
+    var supportedCultures = options.Value.SupportedCultures!
+        .Select(c => new SelectListItem(c.Name.ToUpper(), c.Name))
+        .ToList();
+}
+
+<form asp-area=""
+      asp-controller="Home" 
+      asp-action="SetLang"
+      asp-route-returnUrl="@Context.Request.Path"
+      method="post" 
+      class="form-horizontal mt-1 ms-1" 
+      role="form">
+
+    <select name="culture"
+            onchange="this.form.submit();"
+            asp-for="@requestCulture.Culture.Name" asp-items="supportedCultures"></select>
+</form>

@@ -1,0 +1,38 @@
+﻿@using Microsoft.Extensions.Localization
+@using WRO.Web.Models.Team
+
+@inject IStringLocalizer<Lang> Localizer
+
+@model IEnumerable<WinnerTeamModel>
+
+@{
+    ViewData["Title"] = @Localizer["olympics"];
+}
+
+<div class="row mb-3">
+    <div class="col-md-6">
+        @await Component.InvokeAsync("SelectContestCategory", new { setQueryString = true })
+    </div>
+
+    <div class="col-md-6">
+        <partial name="_SelectSeasonPartial"></partial>
+    </div>
+</div>
+
+@foreach (var team in Model!)
+{
+    <div class="border m-2 row">
+        <h5 class="col-md-12">@team.Name</h5>
+        <p class="col-md-4">@team.ContestCategoryName</p>
+        <p class="col-md-4">@team.Season</p>
+        <a class="col-md-4" asp-action="Members" asp-route-name="@team.Name">Members</a>
+    </div>
+}
+
+<div class="text-center">
+    <h2>@Localizer["olympics_title_1"]</h2>
+    <br />
+    <p>@Localizer["olympics_body_1"]</p>
+    <br />
+    <p>@Localizer["olympics_body_2"]</p>
+</div>

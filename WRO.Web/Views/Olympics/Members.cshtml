@@ -1,0 +1,57 @@
+﻿@using Microsoft.Extensions.Localization
+@using WRO.Web.Areas.Admin.Models.Team
+@model SingleTeamModel
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    ViewData["Title"] = "Members";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h3>@Model.Name</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h5>Full Name</h5>
+        </div>
+        <div class="col">
+            <h5>Identity Number</h5>
+        </div>
+        <div class="col">
+            <h5>BirthDate</h5>
+        </div>
+        <div class="col">
+            <h5>Phone Number</h5>
+        </div>
+        <div class="col">
+            <h5>Instuition</h5>
+        </div>
+    </div>
+    @foreach (var item in Model.Members)
+    {
+        <div class="row">
+
+            <div class="col">
+                @item.FullName
+            </div>
+
+            <div class="col">
+                @item.IdentityNumber
+            </div>
+            <div class="col">
+                @item.BirthDate
+            </div>
+            <div class="col">
+                @item.PhoneNumber
+            </div>
+            <div class="col">
+                @item.Instuition
+            </div>
+
+        </div>
+    }
+
+</div>

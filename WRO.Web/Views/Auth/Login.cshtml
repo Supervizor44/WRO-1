@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+@model LoginModel
+
+@{
+    object? error = null; // dump object for error messages
+}
+
+<div asp-validation-summary="ModelOnly"></div>
+
+<div class="text-center">
+    <form method="post" asp-action="Login">
+
+        <span asp-validation-for="@error" class="text-danger"></span> <br /> <br />
+
+        <label asp-for="Email" class="control-label"></label> <br />
+        <input asp-for="Email" /> <br />
+        <span asp-validation-for="Email" class="text-danger"></span> <br />
+
+        <label asp-for="Password" class="control-label"></label> <br />
+        <input asp-for="Password" /> <br />
+        <span asp-validation-for="Password" class="text-danger"></span> <br />
+
+        @Html.DisplayNameFor(x => x.RememberMe) <input asp-for="RememberMe" /> <br />
+
+        <button type="submit" class="btn-outline-success">Login</button>
+    </form>
+</div>
+
+<partial name="_ValidationScriptsPartial" />

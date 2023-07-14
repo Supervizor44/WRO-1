@@ -1,0 +1,32 @@
+﻿@using Microsoft.Extensions.Localization
+@model (string Culture, string Key, string Value)
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    ViewData["Title"] = Localizer["resource"];
+}
+
+<h2>@Localizer["resource"]</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input name="value" asp-for="@Model.Value" class="form-control" />
+            </div>
+
+            <input name="key" asp-for="@Model.Key" type="hidden" />
+            <input name="culture" asp-for="@Model.Culture" type="hidden" />
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

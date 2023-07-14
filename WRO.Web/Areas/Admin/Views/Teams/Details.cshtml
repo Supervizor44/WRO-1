@@ -1,0 +1,168 @@
+﻿@using WRO.Web.Areas.Admin.Models.Team
+@model SingleTeamModel
+
+@{
+    ViewData["Title"] = "Komanda";
+}
+
+<div>
+    <div>
+    <h2>Komanda</h2>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            Komanda adı
+        </dt>
+        <dd class="col-sm-7">
+            @Model.Name
+        </dd>
+        <dt class="col-sm-3">
+            Yarışdığı kateqoriya
+        </dt>
+        <dd class="col-sm-7">
+            @Model.ContestCategoryName
+        </dd>
+        <dt class="col-sm-3">
+            Qeydiyyat tarixi
+        </dt>
+        <dd class="col-sm-7">
+            @Model.RegistrationDate
+        </dd>
+    </dl>
+
+    <h5>@Html.DisplayNameFor(model => model.TeamCoach)</h5>
+    <div class="row">
+        <div class="col-sm-8">
+            <dl class="row">
+                <dt class="col-sm-5">
+                    Tam adı
+                </dt>
+                <dd class="col-sm-7">
+                    @Model.TeamCoach.FullName
+                </dd>
+                <dt class="col-sm-5">
+                    Əlaqə nömrəsi
+                </dt>
+                <dd class="col-sm-7">
+                    @Model.TeamCoach.PhoneNumber
+                </dd>
+                <dt class="col-sm-5">
+                    Şəxsiyyət vəsiqəsinin fin kodu
+                </dt>
+                <dd class="col-sm-7">
+                    @Model.TeamCoach.IdentityNumber
+                </dd>
+                <dt class="col-sm-5">
+                    Şəxsiyyət vəsiqəsinin seriya nömrəsi
+                </dt>
+                <dd class="col-sm-7">
+                    @Model.TeamCoach.IdSerialNumber
+                </dd>
+                <dt class="col-sm-5">
+                    Email
+                </dt>
+                <dd class="col-sm-7">
+                    Model.TeamCoach.Email
+                </dd>
+                <dt class="col-sm-5">
+                    Doğum tarixi
+                </dt>
+                <dd class="col-sm-7">
+                    @Model.TeamCoach.BirthDate
+                </dd>
+            </dl>
+        </div>
+        <div class="col-sm-4">
+            @if (System.IO.Path.GetExtension(@Model.TeamCoach.CoachImagePath).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
+            {
+                <embed src="@Model.TeamCoach.CoachImagePath" type="application/pdf" width="400" height="200" />
+            }
+            else
+            {
+                <img src="@Model.TeamCoach.CoachImagePath" width="400" height="200" />
+            }
+        </div>
+    </div>
+
+    <h5>@Html.DisplayNameFor(model => model.Members)</h5>
+    @foreach (var member in Model!.Members)
+    {
+        <div class="row mb-4">
+            <div class="col-sm-8">
+                <dl class="row">
+                    <dt class="col-sm-5">
+                        Tam adı
+                    </dt>
+                    <dd class="col-sm-7">
+                        @member.FullName
+                    </dd>
+                    <dt class="col-sm-5">
+                        Əlaqə nömrəsi
+                    </dt>
+                    <dd class="col-sm-7">
+                        @member.PhoneNumber
+                    </dd>
+                    <dt class="col-sm-5">
+                        Şəxsiyyət vəsiqəsinin fin kodu
+                    </dt>
+                    <dd class="col-sm-7">
+                        @member.IdentityNumber
+                    </dd>
+                    <dt class="col-sm-5">
+                        Şəxsiyyət vəsiqəsinin seriya nömrəsi
+                    </dt>
+                    <dd class="col-sm-7">
+                        @member.IdSerialNumber
+                    </dd>
+                    <dt class="col-sm-5">
+                        Oxuduğu universitet
+                    </dt>
+                    <dd class="col-sm-7">
+                        @member.Instuition
+                    </dd>
+                    <dt class="col-sm-5">
+                        Doğum tarixi
+                    </dt>
+                    <dd class="col-sm-7">
+                        @member.BirthDate
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-sm-4">
+                @if (System.IO.Path.GetExtension(member.MemberImagePath).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
+                {
+                    <embed src="@member.MemberImagePath" type="application/pdf" width="400" height="200" />
+                }
+                else
+                {
+                    <img src="@member.MemberImagePath" width="400" height="200" />
+                }
+            </div>
+        </div>
+    }
+</div>
+
+
+
+    
+
+    <div>
+        <form asp-action="ToggleWinState" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button class="btn btn-warning mb-1">
+                @if (Model.IsWinner)
+                {
+                    <text>Qaliblikdən çıxart</text>
+                }
+                else
+                {
+                    <text>Qalib kimi təyin et</text>
+                }
+            </button>
+        </form>
+    </div>
+
+
+    <partial name="_ConfirmDeletePartial" model="@Model!.Id"></partial>
+    <a asp-action="Index">Back to List</a>
+</div>

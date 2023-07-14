@@ -1,0 +1,55 @@
+﻿@using Microsoft.Extensions.Localization
+
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    ViewData["Title"] = Localizer["about_wro"];
+}
+
+<div class="text-center">
+    <h1>
+        @Localizer["about_title_1a"]
+        <br />
+        @Localizer["about_title_1b"]
+    </h1>
+    <br />
+    <p>
+        @Localizer["about_body_1"]
+    </p>
+    <br />
+    <h4>
+        @Localizer["about_title_2"]
+    </h4>
+    <br />
+    <p>
+        @Localizer["about_body_2"]
+    </p>
+    <br />
+    <h6>
+        @Localizer["about_title_3"]
+    </h6>
+    <br />
+
+    <div class="row">
+        <div class="col-md-3">
+            @Localizer["diversity"]
+            <br />
+            @Localizer["about_diversity"]
+        </div>
+        <div class="col-md-3">
+            @Localizer["teamwork"]
+            <br />
+            @Localizer["about_teamwork"]
+        </div>
+        <div class="col-md-3">
+            @Localizer["passion"]
+            <br />
+            @Localizer["about_passion"]
+        </div>
+        <div class="col-md-3">
+            @Localizer["innovation"]
+            <br />
+            @Localizer["about_innovation"]
+        </div>
+    </div>
+</div>

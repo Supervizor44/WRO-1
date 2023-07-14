@@ -1,0 +1,88 @@
+﻿@using Microsoft.Extensions.Localization
+@using WRO.Web.Areas.Admin.Models.Volunteer
+@using System.IO
+@model SingleVolunteerModel
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    ViewData["Title"] = "Könüllü";
+}
+
+<div>
+<h2>Könüllü</h2>
+    <hr />
+    <div class="row">
+        <div class="col-sm-8">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    Tam adı
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.FullName
+                </dd>
+                <dt class="col-sm-4">
+                    Əlaqə nömrəsi
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.PhoneNumber
+                </dd>
+                <dt class="col-sm-4">
+                    Email
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.Email
+                </dd>
+                <dt class="col-sm-4">
+                    Şəxsiyyət vəsiqəsinin fin kodu
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.IdentityNumber
+                <dt class="col-sm-4">
+                    Şəxsiyyət vəsiqəsinin seriya nömrəsi
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.IdSerialNumber
+                </dd>
+                <dt class="col-sm-4">
+                    Oxuduğu universitet və ixtisası
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.ProfessionAtUniversity
+                </dd>
+                <dt class="col-sm-4">
+                    Könüllülük fəaliyyəti
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.VolunteerExperince
+                </dd>
+                <dt class="col-sm-4">
+                    Xarici dil bilikləri
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.KnownForeignLanguages
+                </dd>
+                <dt class="col-sm-4">
+                    Qeydiyyat tarixi
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.RegistrationDate
+                </dd>
+            </dl>
+        </div>
+        <div class="col-sm-4">
+            @if (System.IO.Path.GetExtension(Model.ImagePath).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
+            {
+                <embed src="@Model.ImagePath" type="application/pdf" width="400" height="200" />
+            }
+            else
+            {
+                <img src="@Model.ImagePath" width="400" height="200" />
+            }
+        </div>
+    </div>
+</div>
+
+<div>
+    <partial name="_ConfirmDeletePartial" model="@Model!.Id"></partial>
+    <a asp-action="Index">Back to List</a>
+</div>

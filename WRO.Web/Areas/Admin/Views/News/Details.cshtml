@@ -1,0 +1,48 @@
+﻿@using Microsoft.Extensions.Localization
+@using WRO.Web.Models.News
+@model SingleNewsModel
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    ViewData["Title"] = Localizer["news"];
+}
+
+<div>
+    <h2>@Localizer["news"]</h2>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastModified)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastModified)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Body)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Body)
+        </dd>
+        <dd class="col-sm-10">
+            <img src="@Model.ImagePath" width="400" height="200" />
+        </dd>
+    </dl>
+</div>
+<div>
+    <partial name="_ConfirmDeletePartial" model="@Model!.Id"></partial>
+
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

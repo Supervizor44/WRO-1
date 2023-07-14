@@ -1,0 +1,27 @@
+﻿@using Microsoft.Extensions.Localization
+@using WRO.Web.Data.Entities
+@model IEnumerable<ContestCategory>
+
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    var categories = Model!.Select(x => new SelectListItem(x.Name, x.Id.ToString()));
+    Guid ContestCategoryId = ViewBag.SelectedCategoryId;
+    bool setQueryString = ViewBag.SetQueryString;
+
+    string selectedCategory = Context.Request.Query["category"];
+}
+
+@if (setQueryString)
+{
+    <select onchange="setQueryString('category', this.value);"
+        asp-for="@selectedCategory"
+        asp-items="categories">
+        <option value="">@Localizer["categories"]</option>
+    </select>
+}
+else
+{
+    <select asp-for="@ContestCategoryId" asp-items="categories">
+    </select>
+}

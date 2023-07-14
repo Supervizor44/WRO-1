@@ -1,0 +1,31 @@
+﻿@using Microsoft.Extensions.Localization
+@model IDictionary<string, Dictionary<string, string>>
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    ViewData["Title"] = Localizer["resources"];
+}
+
+<h2>@Localizer["resources"]</h2>
+
+<p>
+    <a asp-action="Create">@Localizer["create"]</a>
+</p>
+<div>
+    @foreach (string key in Model!.Values.First().Keys)
+    {
+        <div class="row border-bottom">
+            @foreach (string culture in Model.Keys)
+            {
+                <a asp-action="Edit" asp-route-culture="@culture" asp-route-key="@key">
+                    <strong class="col-md-1">@culture</strong>
+                </a>
+                if (@Model[culture].TryGetValue(key, out var value))
+                {
+                    <p>@value</p>
+                }
+            }
+        </div>
+    }
+</div>
+

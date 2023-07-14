@@ -1,0 +1,38 @@
+﻿@using Microsoft.Extensions.Localization
+@using WRO.Web.Areas.Admin.Models.Image
+@inject IStringLocalizer<Lang> Localizer
+
+@model UpsertGalleryImageModel
+
+@{
+    ViewData["Title"] = Localizer["gallery"];
+}
+
+<h2>@Localizer["gallery"]</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Images" class="control-label"></label>
+                <input asp-for="Images" accept="image/*" class="form-control" />
+                <span asp-validation-for="Images" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Season" class="control-label"></label>
+                <input asp-for="Season" class="form-control" />
+                <span asp-validation-for="Season" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<partial name="_ValidationScriptsPartial"></partial>

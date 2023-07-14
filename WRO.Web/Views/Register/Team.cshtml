@@ -1,0 +1,142 @@
+﻿@using Microsoft.Extensions.Localization
+@using WRO.Web.Models.Register
+
+@model RegisterTeamModel
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    ViewData["Title"] = Localizer["register"];
+}
+
+<style>
+    .form-group {
+        margin-top: 1rem;
+    }
+</style>
+
+<h1>@Localizer["register"]</h1>
+
+<h4>@Localizer["team"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <form asp-action="Team" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group" style="margin: 1rem 0">
+                <label asp-for="ContestCategoryId" class="control-label"></label>
+                @await Component.InvokeAsync("SelectContestCategory")
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            @*Team coach inputs*@
+            <div class="form-group">
+                <label asp-for="TeamCoach" class="control-label"></label>
+                <div class="mx-3">
+                    <label asp-for="TeamCoach.FirstName" class="control-label"></label>
+                    <input asp-for="TeamCoach.FirstName" class="form-control" />
+                    <span asp-validation-for="TeamCoach.FirstName" class="text-danger"></span>
+                </div>
+                <div class="mx-3">
+                    <label asp-for="TeamCoach.LastName" class="control-label"></label>
+                    <input asp-for="TeamCoach.LastName" class="form-control" />
+                    <span asp-validation-for="TeamCoach.LastName" class="text-danger"></span>
+                </div>
+                <div class="mx-3">
+                    <label asp-for="TeamCoach.PhoneNumber" class="control-label"></label>
+                    <input asp-for="TeamCoach.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="TeamCoach.PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="mx-3">
+                    <label asp-for="TeamCoach.IdentityNumber" class="control-label"></label>
+                    <input asp-for="TeamCoach.IdentityNumber" class="form-control" oninput="this.value = this.value.toUpperCase()"/>
+                    <span asp-validation-for="TeamCoach.IdentityNumber" class="text-danger"></span>
+                </div>
+                <div class="mx-3">
+                    <label asp-for="TeamCoach.IdSerialNumber" class="control-label"></label>
+                    <input asp-for="TeamCoach.IdSerialNumber" class="form-control" oninput="this.value = this.value.toUpperCase()" />
+                    <span asp-validation-for="TeamCoach.IdSerialNumber" class="text-danger"></span>
+                </div>
+                <div class="mx-3">
+                    <label asp-for="TeamCoach.Email" class="control-label"></label>
+                    <input asp-for="TeamCoach.Email" class="form-control" />
+                    <span asp-validation-for="TeamCoach.Email" class="text-danger"></span>
+                </div>
+                <div class="mx-3">
+                    <label asp-for="TeamCoach.BirthDate" class="control-label"></label>
+                    <input asp-for="TeamCoach.BirthDate" class="form-control" />
+                    <span asp-validation-for="TeamCoach.BirthDate" class="text-danger"></span>
+                </div>
+                <div class="mx-3">
+                    <label asp-for="TeamCoach.IdentityCardImageForm" class="control-label"></label>
+                    <input asp-for="TeamCoach.IdentityCardImageForm" accept="image/*" class="form-control" />
+                    <span asp-validation-for="TeamCoach.IdentityCardImageForm" class="text-danger"></span>
+                </div>
+            </div>
+            @*Team members inputs*@
+            <div class="form-group">
+                <label asp-for="Members" class="control-label"> </label>
+                <a class="btn btn-outline-warning" asp-action="Team" asp-route-memberCount="2">2</a>
+                <a class="btn btn-outline-warning" asp-action="Team" asp-route-memberCount="3">3</a>
+                <a class="btn btn-outline-warning" asp-action="Team" asp-route-memberCount="4">4</a>
+                <span asp-validation-for="Members" class="text-danger"></span>
+
+                @for (int i = 0; i < ViewBag.MemberCount; i++)
+                {
+                    <hr />
+                    <p>@(i+1).</p>
+
+                    <div class="mx-3">
+                        <label asp-for="Members[i].FirstName" class="control-label"></label>
+                        <input asp-for="Members[i].FirstName" class="form-control" />
+                        <span asp-validation-for="Members[i].FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="mx-3">
+                        <label asp-for="Members[i].LastName" class="control-label"></label>
+                        <input asp-for="Members[i].LastName" class="form-control" />
+                        <span asp-validation-for="Members[i].LastName" class="text-danger"></span>
+                    </div>
+                    <div class="mx-3">
+                        <label asp-for="Members[i].PhoneNumber" class="control-label"></label>
+                        <input asp-for="Members[i].PhoneNumber" class="form-control" />
+                        <span asp-validation-for="Members[i].PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mx-3">
+                        <label asp-for="Members[i].IdentityNumber" class="control-label"></label>
+                        <input asp-for="Members[i].IdentityNumber" class="form-control" oninput="this.value = this.value.toUpperCase()" />
+                        <span asp-validation-for="Members[i].IdentityNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mx-3">
+                        <label asp-for="Members[i].IdSerialNumber" class="control-label"></label>
+                        <input asp-for="Members[i].IdSerialNumber" class="form-control" oninput="this.value = this.value.toUpperCase()" />
+                        <span asp-validation-for="Members[i].IdSerialNumber" class="text-danger"></span>
+                    </div>
+                    <div class="mx-3">
+                        <label asp-for="Members[i].Instuition" class="control-label"></label>
+                        <input asp-for="Members[i].Instuition" class="form-control" />
+                        <span asp-validation-for="Members[i].Instuition" class="text-danger"></span>
+                    </div>
+                    <div class="mx-3">
+                        <label asp-for="Members[i].BirthDate" class="control-label"></label>
+                        <input asp-for="Members[i].BirthDate" class="form-control" />
+                        <span asp-validation-for="Members[i].BirthDate" class="text-danger"></span>
+                    </div>
+                    <div class="mx-3">
+                        <label asp-for="Members[i].IdentityCardImageForm" class="control-label"></label>
+                        <input asp-for="Members[i].IdentityCardImageForm" accept="image/*" class="form-control" />
+                        <span asp-validation-for="Members[i].IdentityCardImageForm" class="text-danger"></span>
+                    </div>
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@Localizer["submit"]" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<partial name="_ValidationScriptsPartial" />

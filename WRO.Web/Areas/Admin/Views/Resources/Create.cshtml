@@ -1,0 +1,44 @@
+﻿@using Microsoft.Extensions.Localization
+@model IDictionary<string, string>
+
+@inject IStringLocalizer<Lang> Localizer
+
+@{
+    ViewData["Title"] = Localizer["news"];
+    var DefaultResource = ViewBag.DefaultResource as IDictionary<string, string>;
+}
+
+<h2>@Localizer["resource"]</h2>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label class="control-label">Culture/Language</label>
+                <input name="culture" class="form-control" required />
+                @{object culture = null;}
+                <span asp-validation-for="@culture" class="text-danger"></span>
+            </div>
+            <hr />
+            <div class="form-group">
+                @foreach (var pair in DefaultResource!)
+                {
+                    <label class="control-label">@pair.Value</label>
+                    <input asp-for="@Model[pair.Key]" class="form-control" />
+                }
+            </div>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<partial name="_ValidationScriptsPartial"></partial>

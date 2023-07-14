@@ -1,0 +1,25 @@
+﻿@using Microsoft.Extensions.Localization
+@using WRO.Web.Models.Image
+
+@inject IStringLocalizer<Lang> Localizer
+
+@model IEnumerable<ImageModel>
+
+@{
+    ViewData["Title"] = @Localizer["gallery"];
+}
+
+<h1>@Localizer["gallery"]</h1>
+
+<div class="m-3">
+    <partial name="_SelectSeasonPartial"></partial>
+</div>
+
+<div class="row">
+    @foreach (var item in Model!)
+    {
+        <div class="col-md-4 mb-3">
+            <img src="@item.Path" height="200">
+        </div>
+    }
+</div>
